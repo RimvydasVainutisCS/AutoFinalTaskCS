@@ -5,6 +5,8 @@
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
+
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,12 +24,6 @@
     <PackageReference Include="Selenium.Support" Version="4.1.1" />
     <PackageReference Include="Selenium.WebDriver" Version="4.1.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="101.0.4951.4100" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Drivers\" />
-    <Folder Include="Test\" />
-    <Folder Include="Page\" />
   </ItemGroup>
 
 </Project>
