@@ -4,6 +4,8 @@ using AutoFinalTaskCS.Tools;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +16,20 @@ namespace AutoFinalTaskCS.Test
 {
     public class BaseTest
     {
-        private static IWebDriver Driver = null!;
-        private static ExamplePage examplePage;
+        private static IWebDriver driver = null!;
+        private static AccountPage loginPage = null!;
 
         // public static ExamplePage examplePage;
 
 
         [OneTimeSetUp]
-        public static void SetUp()
+        public void Setup()
         {
-            Driver = CustomDriver.GetChromeDriver();
-            examplePage = new ExamplePage(Driver);
+            driver = new ChromeDriver();
+
+            // Which implicit wait approach is better?
+            // WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            driver.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(5));
         }
 
         [TearDown]
@@ -32,14 +37,14 @@ namespace AutoFinalTaskCS.Test
         {
             if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
             {
-                ScreenshotTool.MakeScreenshot(Driver);
+                ScreenshotTool.MakeScreenshot(driver);
             }
         }
 
         [OneTimeTearDown]
         public static void TearDown()
         {
-            Driver.Quit();
+            driver.Quit();
         }
     }
 }
