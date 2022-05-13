@@ -13,7 +13,7 @@ namespace AutoFinalTaskCS.Page
         private readonly string EMAIL_ADDRESS = "random@randomium.com";
         private readonly string FIRST_NAME = "Firstname";
         private readonly string LAST_NAME = "Lastname";
-        private readonly string PWD = "Pa55word^D1ff1cult_3%14";
+        private readonly string PASSWORD = "Pa55word^D1ff1cult_3%14";
         private readonly string ADDRESS = "Street 123-4";
         private readonly string CITY = "City";
         private readonly string STATE = "Utah";
@@ -31,8 +31,9 @@ namespace AutoFinalTaskCS.Page
         private static readonly By ACCOUNT_PASSWORD_INPUT = By.CssSelector("#passwd");
 
         // Address form (mandatory input fields)
-        private static readonly By FIRST_NAME_ADDRESS_INPUT = By.XPath("//*[@id='firstname']");
-        private static readonly By LAST_NAME_ADDRESS_INPUT = By.XPath("//*[@id='lastname']");
+        // First name and Last name are filled automatically 
+        //private static readonly By FIRST_NAME_ADDRESS_INPUT = By.XPath("//*[@id='firstname']");
+        //private static readonly By LAST_NAME_ADDRESS_INPUT = By.XPath("//*[@id='lastname']");
         private static readonly By ADDRESS_INPUT = By.CssSelector("#address1");
         private static readonly By CITY_INPUT = By.CssSelector("#city");
 
@@ -42,6 +43,8 @@ namespace AutoFinalTaskCS.Page
         private static readonly By MOBILE_PHONE_INPUT = By.CssSelector("#phone_mobile");
         private static readonly By ADDRESS_ALIAS_INPUT = By.CssSelector("#alias");
 
+        private static readonly By REGISTER_BUTTON = By.CssSelector("#submitAccount");
+
         public AccountPage(IWebDriver webDriver) : base(webDriver)
         {
             Driver.Navigate().GoToUrl(URL);
@@ -49,10 +52,39 @@ namespace AutoFinalTaskCS.Page
 
         public AccountPage Register()
         {
-            IWebElement emailAddressCreateInput = Driver.FindElement(CREATE_ACCOUNT_EMAIL_ADDRESS_INPUT);
-            emailAddressCreateInput.SendKeys(EMAIL_ADDRESS);
+            IWebElement emailAddressInput = Driver.FindElement(CREATE_ACCOUNT_EMAIL_ADDRESS_INPUT);
+            emailAddressInput.Clear();
+            emailAddressInput.SendKeys(EMAIL_ADDRESS);
             IWebElement createAccountButton = Driver.FindElement(CREATE_ACCOUNT_BUTTON);
             createAccountButton.Click();
+
+            IWebElement firstNameInput = Driver.FindElement(FIRST_NAME_CUSTOMER_INPUT);
+            firstNameInput.Clear();
+            firstNameInput.SendKeys(FIRST_NAME);
+            IWebElement lastNameInput = Driver.FindElement(LAST_NAME_CUSTOMER_INPUT);
+            lastNameInput.Clear();
+            lastNameInput.SendKeys(LAST_NAME);
+            IWebElement passwordInput = Driver.FindElement(ACCOUNT_PASSWORD_INPUT);
+            passwordInput.Clear();
+            passwordInput.SendKeys(PASSWORD);
+            IWebElement addressInput = Driver.FindElement(ADDRESS_INPUT);
+            addressInput.Clear();
+            addressInput.SendKeys(ADDRESS);
+            IWebElement cityInput = Driver.FindElement(CITY_INPUT);
+            cityInput.Clear();
+            cityInput.SendKeys(CITY);
+            // Possibly this won't work, webelement ACTION needed
+            IWebElement stateSelect = Driver.FindElement(UTAH_STATE_OPTION);
+            stateSelect.Click();
+            IWebElement mobilePhoneInput = Driver.FindElement(MOBILE_PHONE_INPUT);
+            mobilePhoneInput.Clear();
+            mobilePhoneInput.SendKeys(MOBILE_PHONE);
+            IWebElement addressAliasInput = Driver.FindElement(ADDRESS_ALIAS_INPUT);
+            addressAliasInput.Clear();
+            addressAliasInput.SendKeys(ADDRESS_ALIAS);
+            IWebElement registerButton = Driver.FindElement(REGISTER_BUTTON);
+            registerButton.Click();
+
 
 
 

@@ -16,8 +16,8 @@ namespace AutoFinalTaskCS.Test
 {
     public class BaseTest
     {
-        private static IWebDriver driver = null!;
-        private static AccountPage loginPage = null!;
+        private static IWebDriver Driver = null!;
+        private static AccountPage LoginPage;
 
         // public static ExamplePage examplePage;
 
@@ -25,11 +25,11 @@ namespace AutoFinalTaskCS.Test
         [OneTimeSetUp]
         public void Setup()
         {
-            driver = new ChromeDriver();
-
+            Driver = new ChromeDriver();
+            LoginPage = new AccountPage(Driver);
             // Which implicit wait approach is better?
             // WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            driver.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(5));
+            Driver.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(5));
         }
 
         [TearDown]
@@ -37,14 +37,14 @@ namespace AutoFinalTaskCS.Test
         {
             if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
             {
-                ScreenshotTool.MakeScreenshot(driver);
+                ScreenshotTool.MakeScreenshot(Driver);
             }
         }
 
         [OneTimeTearDown]
         public static void TearDown()
         {
-            driver.Quit();
+            Driver.Quit();
         }
     }
 }
