@@ -17,7 +17,8 @@ namespace AutoFinalTaskCS.Test
     public class BaseTest
     {
         private static IWebDriver Driver = null!;
-        private static AccountPage LoginPage = null!;
+        // Somehow compiler wants below line to be public, otherwise it shows a 'message'.
+        public AccountPage LoginPage = null!;
 
         // public static ExamplePage examplePage;
 

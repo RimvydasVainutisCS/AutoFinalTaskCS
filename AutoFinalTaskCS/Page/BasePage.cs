@@ -4,16 +4,16 @@ namespace AutoFinalTaskCS.Page
 {
     public class BasePage
     {
-        protected readonly IWebDriver Driver = null!;
+        protected readonly IWebDriver driver = null!;
 
-        public BasePage(IWebDriver webDriver)
+        public BasePage(IWebDriver driver)
         {
-            Driver = webDriver;
+            this.driver = driver;
         }
 
         public void CloseBrowser()
         {
-            Driver.Quit();
+            driver.Quit();
         }
     }
 }

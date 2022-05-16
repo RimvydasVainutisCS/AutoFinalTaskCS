@@ -28,9 +28,12 @@ namespace AutoFinalTaskCS.Test
         public void TestRegister()
         {
             accountPage = new AccountPage(Driver);
+            accountPage.GoToURL();
             accountPage.Register();
-
-            //return new AccountPage(Driver);
+            IWebElement signOutLink = Driver.FindElement(By.CssSelector("a[class='logout']"));
+            var result = signOutLink.Text.ToString();
+            
+            Assert.AreEqual("Sign out", result, "Login failed.");
         }
 
         [TearDown]
