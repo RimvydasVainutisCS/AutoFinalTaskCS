@@ -17,7 +17,7 @@ namespace AutoFinalTaskCS.Test
     public class BaseTest
     {
         private static IWebDriver Driver = null!;
-        private static AccountPage LoginPage;
+        private static AccountPage LoginPage = null!;
 
         // public static ExamplePage examplePage;
 
@@ -25,7 +25,7 @@ namespace AutoFinalTaskCS.Test
         [OneTimeSetUp]
         public void Setup()
         {
-            Driver = new ChromeDriver();
+            Driver = CustomDriver.GetChromeDriver();
             LoginPage = new AccountPage(Driver);
             // Which implicit wait approach is better?
             // WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
