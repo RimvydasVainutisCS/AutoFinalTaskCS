@@ -4,7 +4,7 @@ using System;
 
 namespace AutoFinalTaskCS.Page
 {
-    public class AccountPage// : BasePage
+    public class AccountPage
     {
         const string URL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
         const string EMAIL_ADDRESS = "random4@randomium.com";
@@ -33,7 +33,6 @@ namespace AutoFinalTaskCS.Page
         private static readonly By _loginForm = By.CssSelector("#login_form");
         private static readonly By _loginEmailInput = By.CssSelector("#email");
         private static readonly By _loginPasswordInput = By.CssSelector("#passwd");
-
         private static readonly By _loginSignInButton = By.CssSelector("#SubmitLogin");
 
         private readonly IWebDriver Driver = null!;
@@ -45,7 +44,7 @@ namespace AutoFinalTaskCS.Page
 
         public void GoToURL()
         {
-            this.Driver.Navigate().GoToUrl(URL);
+            Driver.Navigate().GoToUrl(URL);
         }
 
         public AccountPage Register()
@@ -77,7 +76,6 @@ namespace AutoFinalTaskCS.Page
                 }
             });
 
-
             IWebElement firstNameInput = Driver.FindElement(_firstNameCustomerInput);
             firstNameInput.Clear();
             firstNameInput.SendKeys(FIRST_NAME);
@@ -93,7 +91,6 @@ namespace AutoFinalTaskCS.Page
             IWebElement cityInput = Driver.FindElement(_cityInput);
             cityInput.Clear();
             cityInput.SendKeys(CITY);
-            // Possibly this won't work, webelement ACTION needed
             IWebElement stateSelect = Driver.FindElement(_utahStateOption);
             stateSelect.Click();
             IWebElement zipCode = Driver.FindElement(_postCodeInput);

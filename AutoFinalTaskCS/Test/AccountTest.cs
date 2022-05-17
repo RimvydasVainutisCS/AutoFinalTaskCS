@@ -1,21 +1,18 @@
-﻿using AutoFinalTaskCS.Tools;
-using AutoFinalTaskCS.Drivers;
+﻿using AutoFinalTaskCS.Drivers;
 using AutoFinalTaskCS.Page;
+using AutoFinalTaskCS.Tools;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework.Interfaces;
 
 namespace AutoFinalTaskCS.Test
 {
-    public class AccountTest// : BaseTest
+    public class AccountTest
     {
         private static IWebDriver Driver = null!;
         private static AccountPage _accountPage = null!;
+        private static WishlistPage _wishlistPage = null!;
 
         [OneTimeSetUp]
         public void Setup()
@@ -32,7 +29,7 @@ namespace AutoFinalTaskCS.Test
             _accountPage.Register();
             IWebElement signOutLink = Driver.FindElement(By.CssSelector("a[class='logout']"));
             var result = signOutLink.Text.ToString();
-            
+
             Assert.AreEqual("Sign out", result, "Login failed.");
         }
 
@@ -46,6 +43,16 @@ namespace AutoFinalTaskCS.Test
             var result = signOutLink.Text.ToString();
 
             Assert.AreEqual("Sign out", result, "Login failed.");
+        }
+
+        [Test]
+        public void TestWishlistAutoCreation()
+        {
+            _wishlistPage = new WishlistPage(Driver);
+            _wishlistPage.GoToURL();
+            _wishlistPage.AddItemToWishlist();
+            
+            // not finished yet
         }
 
         [TearDown]
