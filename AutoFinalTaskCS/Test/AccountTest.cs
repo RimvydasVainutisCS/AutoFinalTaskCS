@@ -15,7 +15,7 @@ namespace AutoFinalTaskCS.Test
     public class AccountTest// : BaseTest
     {
         private static IWebDriver Driver = null!;
-        private static AccountPage accountPage = null!;
+        private static AccountPage _accountPage = null!;
 
         [OneTimeSetUp]
         public void Setup()
@@ -27,17 +27,29 @@ namespace AutoFinalTaskCS.Test
         [Test]
         public void TestRegister()
         {
-            accountPage = new AccountPage(Driver);
-            accountPage.GoToURL();
-            accountPage.Register();
+            _accountPage = new AccountPage(Driver);
+            _accountPage.GoToURL();
+            _accountPage.Register();
             IWebElement signOutLink = Driver.FindElement(By.CssSelector("a[class='logout']"));
             var result = signOutLink.Text.ToString();
             
             Assert.AreEqual("Sign out", result, "Login failed.");
         }
 
+        [Test]
+        public void TestLogin()
+        {
+            AccountPage _accountPage = new(Driver);
+            _accountPage.GoToURL();
+            _accountPage.Login();
+            IWebElement signOutLink = Driver.FindElement(By.CssSelector("a[class='logout']"));
+            var result = signOutLink.Text.ToString();
+
+            Assert.AreEqual("Sign out", result, "Login failed.");
+        }
+
         [TearDown]
-        public static void TakeScreenshot()
+        public void TakeScreenshot()
         {
             if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
             {
@@ -46,7 +58,7 @@ namespace AutoFinalTaskCS.Test
         }
 
         [OneTimeTearDown]
-        public static void TearDown()
+        public void TearDown()
         {
             Driver.Quit();
         }
