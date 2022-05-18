@@ -27,10 +27,8 @@ namespace AutoFinalTaskCS.Test
             _accountPage = new AccountPage(Driver);
             _accountPage.GoToURL();
             _accountPage.Register();
-            IWebElement signOutLink = Driver.FindElement(By.CssSelector("a[class='logout']"));
-            var result = signOutLink.Text.ToString();
-
-            Assert.AreEqual("Sign out", result, "Login failed.");
+            
+            Assert.AreEqual("Sign out", _accountPage.GetSignOutButtonName(), "Login failed.");
         }
 
         [Test]
@@ -39,10 +37,8 @@ namespace AutoFinalTaskCS.Test
             AccountPage _accountPage = new(Driver);
             _accountPage.GoToURL();
             _accountPage.Login();
-            IWebElement signOutLink = Driver.FindElement(By.CssSelector("a[class='logout']"));
-            var result = signOutLink.Text.ToString();
-
-            Assert.AreEqual("Sign out", result, "Login failed.");
+            
+            Assert.AreEqual("Sign out", _accountPage.GetSignOutButtonName(), "Login failed.");
         }
 
         [Test]
