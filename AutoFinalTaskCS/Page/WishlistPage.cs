@@ -28,36 +28,41 @@ namespace AutoFinalTaskCS.Page
             Driver.Navigate().GoToUrl(URL);
         }
 
+        public bool CheckWishlistIsEmpty()
+        {
+            IReadOnlyCollection<IWebElement> wishlist = Driver.FindElements(_wishlistBlock);
+            if (wishlist.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                throw new Exception("Wishlist already exist.");
+            }
+        }
+
+        public void GoToItemURL()
+        {
+            Driver.Navigate().GoToUrl(ITEM_URL);
+        }
+
         public void AddItemToWishlist()
         {
-            WebDriverWait wait = new(Driver, TimeSpan.FromSeconds(15))
-            {
-                PollingInterval = TimeSpan.FromMilliseconds(250)
-            };
-            bool element = wait.Until(condition =>
-            {
-                try
-                {
-                    IWebElement wishlistBlock = Driver.FindElement(_wishlistBlock);
-                    return wishlistBlock.Displayed;
-                }
-                catch (StaleElementReferenceException)
-                {
-                    return false;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            });
-
-            if (element == false)
-            {
-                Driver.Navigate().GoToUrl(ITEM_URL);
-            }
-
             IWebElement wishlistButton = Driver.FindElement(_wishlistButton);
             wishlistButton.Click();
+        }
+
+        public bool CheckItemIsAddedToWishlist()
+        {
+            IWebElement wishlistBlockItems = Driver.FindElement(_wishlistBlock);
+            if (wishlistBlockItems.Displayed)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

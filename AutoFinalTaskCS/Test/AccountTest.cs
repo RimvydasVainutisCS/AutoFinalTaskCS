@@ -11,8 +11,8 @@ namespace AutoFinalTaskCS.Test
     public class AccountTest
     {
         private static IWebDriver Driver = null!;
-        private static AccountPage _accountPage = null!;
-        private static WishlistPage _wishlistPage = null!;
+        //private static AccountPage _accountPage = null!;
+        //private static WishlistPage _wishlistPage = null!;
 
         [OneTimeSetUp]
         public void Setup()
@@ -24,7 +24,7 @@ namespace AutoFinalTaskCS.Test
         [Test]
         public void TestRegister()
         {
-            _accountPage = new AccountPage(Driver);
+            AccountPage _accountPage = new(Driver);
             _accountPage.GoToURL();
             _accountPage.Register();
             
@@ -44,11 +44,35 @@ namespace AutoFinalTaskCS.Test
         [Test]
         public void TestWishlistAutoCreation()
         {
-            _wishlistPage = new WishlistPage(Driver);
+            AccountPage _accountPage = new(Driver);
+            _accountPage.GoToURL();
+            _accountPage.Login();
+
+            WishlistPage _wishlistPage = new(Driver);
             _wishlistPage.GoToURL();
-            _wishlistPage.AddItemToWishlist();
-            
-            // not finished yet
+            if (_wishlistPage.CheckWishlistIsEmpty())
+            {
+                _wishlistPage.GoToItemURL();
+                _wishlistPage.AddItemToWishlist();
+                _wishlistPage.GoToURL();
+
+                if (_wishlistPage.CheckItemIsAddedToWishlist())
+                {
+                    _wishlistPage.GoToItemURL();
+                    _wishlistPage.AddItemToWishlist();
+                    _wishlistPage.GoToURL();
+
+                    Assert.IsTrue(_wishlistPage.CheckItemIsAddedToWishlist(), "Wishlist was not created automatically.");
+                }
+                else
+                {
+                    throw new Exception("Item was not added to the wishlist.");
+                }
+            }
+            else
+            {
+                throw new Exception("Wishlist exists.");
+            }            
         }
 
         [TearDown]
