@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -9,10 +8,11 @@ namespace AutoFinalTaskCS.Page
     public class WishlistPage
     {
         const string URL = "http://automationpractice.com/index.php?fc=module&module=blockwishlist&controller=mywishlist";
-        const string ITEM_URL = "http://automationpractice.com/index.php?id_product=7&controller=product";
-        const string ITEM_NAME = "Printed Chiffon Dress\r\nS, Yellow";
-        const string CUSTOM_WISHLIST_NAME = "Custom Wishlist";
+        const string ITEM_ONE_URL = "http://automationpractice.com/index.php?id_product=7&controller=product";
+        const string ITEM_ONE_NAME = "Printed Chiffon Dress\r\nS, Yellow";
 
+        const string CUSTOM_WISHLIST_NAME = "Custom Wishlist";
+        
         private static readonly By _wishlistBlock = By.CssSelector("#block-history");
         private static readonly By _wishlistButton = By.CssSelector("#wishlist_button");
         private static readonly By _newWishlistNameField = By.CssSelector("#name");
@@ -46,7 +46,7 @@ namespace AutoFinalTaskCS.Page
 
         public void GoToItemURL()
         {
-            Driver.Navigate().GoToUrl(ITEM_URL);
+            Driver.Navigate().GoToUrl(ITEM_ONE_URL);
         }
 
         public void AddItemToWishlist()
@@ -83,7 +83,7 @@ namespace AutoFinalTaskCS.Page
             Thread.Sleep(6000);
 
             IWebElement customWishlistItemName = Driver.FindElement(_customWishlistItemName);
-            if (customWishlistItemName.Text == ITEM_NAME)
+            if (customWishlistItemName.Text == ITEM_ONE_NAME)
             {
                 return true;
             }
@@ -97,6 +97,6 @@ namespace AutoFinalTaskCS.Page
         {
             IWebElement deleteWishlistButton = Driver.FindElement(_deleteWishlistButton);
             deleteWishlistButton.Click();
-        }
+        }        
     }
 }

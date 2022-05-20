@@ -20,7 +20,7 @@ namespace AutoFinalTaskCS.Test
             Driver.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(5));
         }
 
-        [Test]
+        [Test, Order(1)]
         public void TestRegister()
         {
             AccountPage _accountPage = new(Driver);
@@ -30,7 +30,7 @@ namespace AutoFinalTaskCS.Test
             Assert.AreEqual("Sign out", _accountPage.GetSignOutButtonName(), "Login failed.");
         }
 
-        [Test]
+        [Test, Order(2)]
         public void TestLogin()
         {
             AccountPage _accountPage = new(Driver);
@@ -40,7 +40,7 @@ namespace AutoFinalTaskCS.Test
             Assert.AreEqual("Sign out", _accountPage.GetSignOutButtonName(), "Login failed.");
         }
 
-        [Test]
+        [Test, Order(3)]
         public void TestWishlistAutoCreation()
         {
             AccountPage _accountPage = new(Driver);
@@ -75,7 +75,7 @@ namespace AutoFinalTaskCS.Test
             }
         }
 
-        [Test]
+        [Test, Order(4)]
         public void TestAddToCustomWishlist()
         {
             AccountPage _accountPage = new(Driver);
@@ -113,6 +113,24 @@ namespace AutoFinalTaskCS.Test
             }
         }
 
+        [Test, Order(5)]
+        public void TestAddThreeItemsToCart()
+        {
+            AccountPage _accountPage = new(Driver);
+            _accountPage.GoToURL();
+            _accountPage.Login();
+
+            CartPage _cartPage = new(Driver);
+            _cartPage.AddItemOneToCart();
+            _cartPage.AddItemTwoToCart();
+            _cartPage.AddItemThreeToCart();
+
+            Assert.IsTrue(_cartPage.CheckCartItemsAdded(), "Items were not added to the Cart.");
+            Assert.IsTrue(_cartPage.CheckCartTotalCorrect(), "Total sum of Cart is not correct.");
+
+            _cartPage.CheckCartItemsAdded();
+            _cartPage.CheckCartTotalCorrect();
+        }
 
         [TearDown]
         public void TakeScreenshot()
