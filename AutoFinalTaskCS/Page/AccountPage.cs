@@ -7,7 +7,7 @@ namespace AutoFinalTaskCS.Page
     public class AccountPage
     {
         const string URL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
-        const string EMAIL_ADDRESS = "random6@randomium.com";
+        const string EMAIL_ADDRESS = "random8@randomium.com";
         const string FIRST_NAME = "Firstname";
         const string LAST_NAME = "Lastname";
         const string PASSWORD = "Pa55word^D1ff1cult_3%14";

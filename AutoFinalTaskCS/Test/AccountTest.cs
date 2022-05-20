@@ -5,14 +5,13 @@ using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using System;
+using System.Threading;
 
 namespace AutoFinalTaskCS.Test
 {
     public class AccountTest
     {
         private static IWebDriver Driver = null!;
-        //private static AccountPage _accountPage = null!;
-        //private static WishlistPage _wishlistPage = null!;
 
         [OneTimeSetUp]
         public void Setup()
@@ -27,7 +26,7 @@ namespace AutoFinalTaskCS.Test
             AccountPage _accountPage = new(Driver);
             _accountPage.GoToURL();
             _accountPage.Register();
-            
+
             Assert.AreEqual("Sign out", _accountPage.GetSignOutButtonName(), "Login failed.");
         }
 
@@ -37,7 +36,7 @@ namespace AutoFinalTaskCS.Test
             AccountPage _accountPage = new(Driver);
             _accountPage.GoToURL();
             _accountPage.Login();
-            
+
             Assert.AreEqual("Sign out", _accountPage.GetSignOutButtonName(), "Login failed.");
         }
 
@@ -58,22 +57,62 @@ namespace AutoFinalTaskCS.Test
 
                 if (_wishlistPage.CheckItemIsAddedToWishlist())
                 {
-                    _wishlistPage.GoToItemURL();
-                    _wishlistPage.AddItemToWishlist();
-                    _wishlistPage.GoToURL();
-
                     Assert.IsTrue(_wishlistPage.CheckItemIsAddedToWishlist(), "Wishlist was not created automatically.");
                 }
                 else
                 {
                     throw new Exception("Item was not added to the wishlist.");
                 }
+
+                _wishlistPage.DeleteWishlist();
+                Thread.Sleep(6000);
+                Driver.SwitchTo().Alert().Accept();
+                Thread.Sleep(8000);
             }
             else
             {
                 throw new Exception("Wishlist exists.");
-            }            
+            }
         }
+
+        [Test]
+        public void TestAddToCustomWishlist()
+        {
+            AccountPage _accountPage = new(Driver);
+            _accountPage.GoToURL();
+            _accountPage.Login();
+
+            WishlistPage _wishlistPage = new(Driver);
+            _wishlistPage.GoToURL();
+            if (_wishlistPage.CheckWishlistIsEmpty())
+            {
+                _wishlistPage.CreateCustomWishlist();
+                Thread.Sleep(3000);
+
+                _wishlistPage.GoToItemURL();
+                _wishlistPage.AddItemToWishlist();
+                _wishlistPage.GoToURL();
+
+                if (_wishlistPage.CheckItemAddedToCustomWishlist())
+                {
+                    Assert.IsTrue(_wishlistPage.CheckItemAddedToCustomWishlist(), "Wishlist was not created automatically.");
+                }
+                else
+                {
+                    throw new Exception("Item was not added to the wishlist.");
+                }
+
+                _wishlistPage.DeleteWishlist();
+                Thread.Sleep(6000);
+                Driver.SwitchTo().Alert().Accept();
+                Thread.Sleep(8000);
+            }
+            else
+            {
+                throw new Exception("Wishlist exists.");
+            }
+        }
+
 
         [TearDown]
         public void TakeScreenshot()
