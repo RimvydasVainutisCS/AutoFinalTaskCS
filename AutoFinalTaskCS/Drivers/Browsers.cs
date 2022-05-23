@@ -6,6 +6,8 @@
         IncognintoChrome,
         Firefox,
         DockerRemote,
+        SauceLabsChromeOptions,
+        SauceLabsFirefoxOptions,
         Opera,
         Edge,
         Safari

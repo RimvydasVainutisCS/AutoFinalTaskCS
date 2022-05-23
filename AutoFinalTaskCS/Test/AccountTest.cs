@@ -19,51 +19,11 @@ namespace AutoFinalTaskCS.Test
         {
             try
             {
-                ////TODO please supply your Sauce Labs user name in an environment variable
-                //var sauceUserName = Environment.GetEnvironmentVariable(
-                //    "oauth-rimvydasvainutis-0ec30", EnvironmentVariableTarget.User);
-                ////TODO please supply your own Sauce Labs access Key in an environment variable
-                //var sauceAccessKey = Environment.GetEnvironmentVariable(
-                //    "6e994015-8bb9-4e3f-b1c3-99e7630a0631", EnvironmentVariableTarget.User);
-
-                /*
-                 * WINDOWS 10, MS EDGE latest
-                 * 
-                var browserOptions = new EdgeOptions();
-                browserOptions.PlatformName = "Windows 10";
-                browserOptions.BrowserVersion = "latest";
-                var sauceOptions = new Dictionary<string, object>();
-                browserOptions.AddAdditionalOption("sauce:options", sauceOptions);
-                */
-
-                /*
-                 * WINDOWS 8.1, FIREFOX latest
-                 * 
-                var browserOptions = new FirefoxOptions();
-                browserOptions.PlatformName = "Windows 8.1";
-                browserOptions.BrowserVersion = "latest";
-                var sauceOptions = new Dictionary<string, object>();
-                browserOptions.AddAdditionalOption("sauce:options", sauceOptions);
-                */
-
-                /*
-                 * MAC OS Monterey (12), GOOGLE CHROME latest 
-                */
-
-                /*
-                var browserOptions = new ChromeOptions();
-                browserOptions.PlatformName = "macOS 12";
-                browserOptions.BrowserVersion = "latest";
-                var sauceOptions = new Dictionary<string, object>();
-                browserOptions.AddAdditionalOption("sauce:options", sauceOptions);
-
-                Driver = new RemoteWebDriver(new Uri("https://oauth-rimvydasvainutis-0ec30:6e994015-8bb9-4e3f-b1c3-99e7630a0631@ondemand.eu-central-1.saucelabs.com:443/wd/hub"), browserOptions.ToCapabilities(),
-                    TimeSpan.FromSeconds(600));
-                */
-
                 //Driver = CustomDriver.GetChromeDriver();
                 //Driver = CustomDriver.GetFirefoxDriver();
-                Driver = CustomDriver.GetDockerRemote();
+                //Driver = CustomDriver.GetDockerRemote();
+                //Driver = CustomDriver.GetSauceLabsChrome();
+                Driver = CustomDriver.GetSauceLabsFirefox();
                 Driver.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(5));
 
             }
