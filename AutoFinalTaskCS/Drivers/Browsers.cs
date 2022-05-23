@@ -5,6 +5,7 @@
         Chrome,
         IncognintoChrome,
         Firefox,
+        DockerRemote,
         Opera,
         Edge,
         Safari

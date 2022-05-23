@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 using System;
 
 namespace AutoFinalTaskCS.Drivers
@@ -20,6 +21,10 @@ namespace AutoFinalTaskCS.Drivers
         {
             return GetDriver(Browsers.Edge);
         }
+        public static IWebDriver GetDockerRemote()
+        {
+            return GetDriver(Browsers.DockerRemote);
+        }
 
         private static IWebDriver GetDriver(Browsers browserName)
         {
@@ -35,8 +40,9 @@ namespace AutoFinalTaskCS.Drivers
                     driver = new FirefoxDriver();
                     break;
 
-                case Browsers.Edge:
-                    driver = new EdgeDriver();
+                case Browsers.DockerRemote:
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), chromeOptions);
                     break;
             }
 
