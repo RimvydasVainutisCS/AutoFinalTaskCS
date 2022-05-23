@@ -19,11 +19,11 @@ namespace AutoFinalTaskCS.Test
         {
             try
             {
-                //Driver = CustomDriver.GetChromeDriver();
+                Driver = CustomDriver.GetChromeDriver();
                 //Driver = CustomDriver.GetFirefoxDriver();
                 //Driver = CustomDriver.GetDockerRemote();
                 //Driver = CustomDriver.GetSauceLabsChrome();
-                Driver = CustomDriver.GetSauceLabsFirefox();
+                //Driver = CustomDriver.GetSauceLabsFirefox();
                 Driver.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(5));
 
             }
@@ -146,7 +146,7 @@ namespace AutoFinalTaskCS.Test
         }
 
         [TearDown]
-        public void TakeScreenshot()
+        public static void TakeScreenshot()
         {
             if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
             {

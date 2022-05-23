@@ -36,12 +36,6 @@ namespace AutoFinalTaskCS.Drivers
 
         private static IWebDriver GetDriver(Browsers browserName)
         {
-            //TODO please supply your Sauce Labs user name in an environment variable
-            string? sauceUserName = Environment.GetEnvironmentVariable(
-                "oauth-rimvydasvainutis-0ec30", EnvironmentVariableTarget.User);
-            //TODO please supply your own Sauce Labs access Key in an environment variable
-            string? sauceAccessKey = Environment.GetEnvironmentVariable(
-                "6e994015-8bb9-4e3f-b1c3-99e7630a0631", EnvironmentVariableTarget.User);
             IWebDriver? driver = null!;
 
             switch (browserName)
@@ -55,7 +49,7 @@ namespace AutoFinalTaskCS.Drivers
                     break;
 
                 case Browsers.DockerRemote:
-                    ChromeOptions chromeOptions = new ChromeOptions();
+                    ChromeOptions chromeOptions = new();
                     driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), chromeOptions);
                     break;
 
@@ -89,7 +83,6 @@ namespace AutoFinalTaskCS.Drivers
                         TimeSpan.FromSeconds(600));
                     break;
             }
-
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Manage().Window.Maximize();
 
