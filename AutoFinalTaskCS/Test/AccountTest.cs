@@ -9,34 +9,12 @@ using System.Threading;
 
 namespace AutoFinalTaskCS.Test
 {
-    public class AccountTest
+    public class AccountTest : BaseTest
     {
-        private static IWebDriver Driver = null!;
-
-        [OneTimeSetUp]
-
-        public void Setup()
-        {
-            try
-            {
-                Driver = CustomDriver.GetChromeDriver();
-                //Driver = CustomDriver.GetFirefoxDriver();
-                //Driver = CustomDriver.GetDockerRemote();
-                //Driver = CustomDriver.GetSauceLabsChrome();
-                //Driver = CustomDriver.GetSauceLabsFirefox();
-                Driver.Manage().Timeouts().ImplicitWait.Add(TimeSpan.FromSeconds(5));
-
-            }
-            catch (Exception)
-            {
-                Console.WriteLine(Environment.StackTrace);
-            }
-        }
-
         [Test, Order(1)]
         public void TestRegister()
         {
-            AccountPage _accountPage = new(Driver);
+            //AccountPage _accountPage = new(Driver);
             _accountPage.GoToURL();
             _accountPage.Register();
 
@@ -56,11 +34,11 @@ namespace AutoFinalTaskCS.Test
         [Test, Order(3)]
         public void TestWishlistAutoCreation()
         {
-            AccountPage _accountPage = new(Driver);
+            //AccountPage _accountPage = new(Driver);
             _accountPage.GoToURL();
             _accountPage.Login();
 
-            WishlistPage _wishlistPage = new(Driver);
+            //WishlistPage _wishlistPage = new(Driver);
             _wishlistPage.GoToURL();
             if (_wishlistPage.CheckWishlistIsEmpty())
             {
@@ -145,19 +123,19 @@ namespace AutoFinalTaskCS.Test
             _cartPage.CheckCartTotalCorrect();
         }
 
-        [TearDown]
-        public static void TakeScreenshot()
-        {
-            if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
-            {
-                ScreenshotTool.MakeScreenshot(Driver);
-            }
-        }
+        //[TearDown]
+        //public static void TakeScreenshot()
+        //{
+        //    if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
+        //    {
+        //        ScreenshotTool.MakeScreenshot(Driver);
+        //    }
+        //}
 
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            Driver.Quit();
-        }
+        //[OneTimeTearDown]
+        //public void TearDown()
+        //{
+        //    Driver.Quit();
+        //}
     }
 }

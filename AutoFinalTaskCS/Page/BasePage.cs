@@ -6,9 +6,9 @@ namespace AutoFinalTaskCS.Page
     {
         protected IWebDriver Driver = null!;
 
-        public BasePage(IWebDriver webDriver)
+        public BasePage(IWebDriver driver)
         {
-            Driver = webDriver;
+            Driver = driver;
         }
 
         public void CloseBrowser()

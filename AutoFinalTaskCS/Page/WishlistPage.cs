@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace AutoFinalTaskCS.Page
 {
-    public class WishlistPage
+    public class WishlistPage : BasePage
     {
         const string URL = "http://automationpractice.com/index.php?fc=module&module=blockwishlist&controller=mywishlist";
         const string ITEM_ONE_URL = "http://automationpractice.com/index.php?id_product=7&controller=product";
@@ -21,11 +21,15 @@ namespace AutoFinalTaskCS.Page
         private static readonly By _customWishlistItemName = By.CssSelector("p[class='product-name']");
         private static readonly By _deleteWishlistButton = By.XPath(".//td[6]/a");
 
-        private readonly IWebDriver Driver = null!;
-        public WishlistPage(IWebDriver driver)
+        public WishlistPage(IWebDriver driver) : base(driver)
         {
-            Driver = driver;
         }
+
+        //private readonly IWebDriver Driver = null!;
+        //public WishlistPage(IWebDriver driver)
+        //{
+        //    Driver = driver;
+        //}
         public void GoToURL()
         {
             Driver.Navigate().GoToUrl(URL);

@@ -4,11 +4,11 @@ using System;
 
 namespace AutoFinalTaskCS.Page
 {
-    public class AccountPage
+    public class AccountPage : BasePage
     {
         const string URL = "http://automationpractice.com/index.php?controller=authentication&back=my-account";
         // Add +1 to 'random' name to register a new account
-        const string EMAIL_ADDRESS = "random9@randomium.com";
+        const string EMAIL_ADDRESS = "random8@randomium.com";
         const string FIRST_NAME = "Firstname";
         const string LAST_NAME = "Lastname";
         const string PASSWORD = "Pa55word^D1ff1cult_3%14";
@@ -37,12 +37,16 @@ namespace AutoFinalTaskCS.Page
         private static readonly By _loginSignInButton = By.CssSelector("#SubmitLogin");
         private static readonly By _signOutButton = By.CssSelector("a[class='logout']");
 
-        private readonly IWebDriver Driver = null!;
-
-        public AccountPage(IWebDriver driver)
+        public AccountPage(IWebDriver driver) : base(driver)
         {
-            Driver = driver;
         }
+
+        //private readonly IWebDriver Driver = null!;
+
+        //public AccountPage(IWebDriver driver)
+        //{
+        //    Driver = driver;
+        //}
 
         public void GoToURL()
         {

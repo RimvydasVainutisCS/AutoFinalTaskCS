@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AutoFinalTaskCS.Page
 {
-    public class CartPage
+    public class CartPage : BasePage
     {
         const string URL = "http://automationpractice.com/index.php?controller=order";
         const string ITEM_ONE_URL = "http://automationpractice.com/index.php?id_product=7&controller=product";
@@ -28,12 +28,16 @@ namespace AutoFinalTaskCS.Page
         private static readonly By _summaryProductsQuantity = By.CssSelector("#summary_products_quantity");
         private static readonly By _summaryProductsTotalPrice = By.CssSelector("#total_price");
 
-        private readonly IWebDriver Driver = null!;
+        //private readonly IWebDriver Driver = null!;
 
-        public CartPage(IWebDriver driver)
+        public CartPage(IWebDriver driver) : base(driver)
         {
-            Driver = driver;
         }
+
+        //public CartPage(IWebDriver driver)
+        //{
+        //    Driver = driver;
+        //}
         public void GoToURL()
         {
             Driver.Navigate().GoToUrl(URL);
