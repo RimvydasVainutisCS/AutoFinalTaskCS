@@ -41,13 +41,6 @@ namespace AutoFinalTaskCS.Page
         {
         }
 
-        //private readonly IWebDriver Driver = null!;
-
-        //public AccountPage(IWebDriver driver)
-        //{
-        //    Driver = driver;
-        //}
-
         public void GoToURL()
         {
             Driver.Navigate().GoToUrl(URL);

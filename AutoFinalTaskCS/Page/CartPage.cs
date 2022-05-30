@@ -1,10 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AutoFinalTaskCS.Page
 {
@@ -12,15 +8,8 @@ namespace AutoFinalTaskCS.Page
     {
         const string URL = "http://automationpractice.com/index.php?controller=order";
         const string ITEM_ONE_URL = "http://automationpractice.com/index.php?id_product=7&controller=product";
-        //const string ITEM_ONE_NAME = "Printed Chiffon Dress\r\nS, Yellow";
-        //const string ITEM_ONE_PRICE = "$16.40";
         const string ITEM_TWO_URL = "http://automationpractice.com/index.php?id_product=3&controller=product";
-        //const string ITEM_TWO_NAME = "Printed Dress";
-        //const string ITEM_TWO_PRICE = "$26.00";
         const string ITEM_THREE_URL = "http://automationpractice.com/index.php?id_product=2&controller=product";
-        //const string ITEM_THREE_NAME = "Blouse";
-        //const string ITEM_THREE_PRICE = "$27.00";
-
         const string CART_THREE_ITEMS = "3 Products";
         const string CART_TOTAL_PRICE = "$71.40";
 
@@ -28,20 +17,15 @@ namespace AutoFinalTaskCS.Page
         private static readonly By _summaryProductsQuantity = By.CssSelector("#summary_products_quantity");
         private static readonly By _summaryProductsTotalPrice = By.CssSelector("#total_price");
 
-        //private readonly IWebDriver Driver = null!;
-
         public CartPage(IWebDriver driver) : base(driver)
         {
         }
 
-        //public CartPage(IWebDriver driver)
-        //{
-        //    Driver = driver;
-        //}
         public void GoToURL()
         {
             Driver.Navigate().GoToUrl(URL);
         }
+
         public void AddItemOneToCart()
         {
             Driver.Navigate().GoToUrl(ITEM_ONE_URL);
@@ -49,6 +33,7 @@ namespace AutoFinalTaskCS.Page
             addToCartButton.Click();
             Thread.Sleep(2000);
         }
+
         public void AddItemTwoToCart()
         {
             Driver.Navigate().GoToUrl(ITEM_TWO_URL);
@@ -56,6 +41,7 @@ namespace AutoFinalTaskCS.Page
             addToCartButton.Click();
             Thread.Sleep(2000);
         }
+
         public void AddItemThreeToCart()
         {
             Driver.Navigate().GoToUrl(ITEM_THREE_URL);

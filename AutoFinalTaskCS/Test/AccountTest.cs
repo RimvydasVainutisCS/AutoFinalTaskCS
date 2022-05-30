@@ -1,11 +1,5 @@
-﻿using AutoFinalTaskCS.Drivers;
-using AutoFinalTaskCS.Page;
-using AutoFinalTaskCS.Tools;
+﻿using AutoFinalTaskCS.Page;
 using NUnit.Framework;
-using NUnit.Framework.Interfaces;
-using OpenQA.Selenium;
-using System;
-using System.Threading;
 
 namespace AutoFinalTaskCS.Test
 {
@@ -14,7 +8,7 @@ namespace AutoFinalTaskCS.Test
         [Test, Order(1)]
         public void TestRegister()
         {
-            //AccountPage _accountPage = new(Driver);
+            AccountPage _accountPage = new(Driver);
             _accountPage.GoToURL();
             _accountPage.Register();
 
@@ -34,36 +28,20 @@ namespace AutoFinalTaskCS.Test
         [Test, Order(3)]
         public void TestWishlistAutoCreation()
         {
-            //AccountPage _accountPage = new(Driver);
+            AccountPage _accountPage = new(Driver);
             _accountPage.GoToURL();
             _accountPage.Login();
 
-            //WishlistPage _wishlistPage = new(Driver);
+            WishlistPage _wishlistPage = new(Driver);
+            _wishlistPage.GoToItemURL();
+            _wishlistPage.CheckWishlistIsEmpty();
+            _wishlistPage.AddItemToWishlist();
             _wishlistPage.GoToURL();
-            if (_wishlistPage.CheckWishlistIsEmpty())
-            {
-                _wishlistPage.GoToItemURL();
-                _wishlistPage.AddItemToWishlist();
-                _wishlistPage.GoToURL();
+            _wishlistPage.CheckItemIsAddedToWishlist();
 
-                if (_wishlistPage.CheckItemIsAddedToWishlist())
-                {
-                    Assert.IsTrue(_wishlistPage.CheckItemIsAddedToWishlist(), "Wishlist was not created automatically.");
-                }
-                else
-                {
-                    throw new Exception("Item was not added to the wishlist.");
-                }
+            Assert.IsTrue(_wishlistPage.CheckItemIsAddedToWishlist(), "Wishlist was not created automatically.");
 
-                _wishlistPage.DeleteWishlist();
-                Thread.Sleep(6000);
-                Driver.SwitchTo().Alert().Accept();
-                Thread.Sleep(8000);
-            }
-            else
-            {
-                throw new Exception("Wishlist exists.");
-            }
+            _wishlistPage.DeleteWishlist();
         }
 
         [Test, Order(4)]
@@ -75,33 +53,16 @@ namespace AutoFinalTaskCS.Test
 
             WishlistPage _wishlistPage = new(Driver);
             _wishlistPage.GoToURL();
-            if (_wishlistPage.CheckWishlistIsEmpty())
-            {
-                _wishlistPage.CreateCustomWishlist();
-                Thread.Sleep(3000);
+            _wishlistPage.CheckWishlistIsEmpty();
+            _wishlistPage.CreateCustomWishlist();
+            _wishlistPage.GoToItemURL();
+            _wishlistPage.AddItemToWishlist();
+            _wishlistPage.GoToURL();
+            _wishlistPage.CheckItemAddedToCustomWishlist();
 
-                _wishlistPage.GoToItemURL();
-                _wishlistPage.AddItemToWishlist();
-                _wishlistPage.GoToURL();
+            Assert.IsTrue(_wishlistPage.CheckItemAddedToCustomWishlist(), "Wishlist was not created automatically.");
 
-                if (_wishlistPage.CheckItemAddedToCustomWishlist())
-                {
-                    Assert.IsTrue(_wishlistPage.CheckItemAddedToCustomWishlist(), "Wishlist was not created automatically.");
-                }
-                else
-                {
-                    throw new Exception("Item was not added to the wishlist.");
-                }
-
-                _wishlistPage.DeleteWishlist();
-                Thread.Sleep(6000);
-                Driver.SwitchTo().Alert().Accept();
-                Thread.Sleep(8000);
-            }
-            else
-            {
-                throw new Exception("Wishlist exists.");
-            }
+            _wishlistPage.DeleteWishlist();
         }
 
         [Test, Order(5)]
@@ -122,20 +83,5 @@ namespace AutoFinalTaskCS.Test
             _cartPage.CheckCartItemsAdded();
             _cartPage.CheckCartTotalCorrect();
         }
-
-        //[TearDown]
-        //public static void TakeScreenshot()
-        //{
-        //    if (TestContext.CurrentContext.Result.Outcome != ResultState.Success)
-        //    {
-        //        ScreenshotTool.MakeScreenshot(Driver);
-        //    }
-        //}
-
-        //[OneTimeTearDown]
-        //public void TearDown()
-        //{
-        //    Driver.Quit();
-        //}
     }
 }
